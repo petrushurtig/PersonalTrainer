@@ -42,7 +42,7 @@ return(
                 margin="dense"
                 name="date"
                 value={training.date}
-                defaultValue={m}
+                //defaultValue={m}
                 onChange={event => handleInputChange(event)}
                 label="Date"
                 fullWidth

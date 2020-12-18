@@ -53,7 +53,7 @@ export default function TrainingTable() {
       },
       {
         Header: 'Customer',
-        id: "customer.firstname",
+        id: "customerfirstname",
         accessor: row => `${row.customer.firstname} ${row.customer.lastname}`
       }
     ]

@@ -14,8 +14,15 @@ export default function CustomerTable() {
 
   useEffect(() => fetchData(), []);
 
-  const fetchData = () => {
-    fetch('https://customerrest.herokuapp.com/api/customers')
+  const fetchData = (training) => {
+    fetch('https://customerrest.herokuapp.com/api/customers', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(training)
+    })
+  
     .then(res => res.json())
     .then(data => setCustomers(data.content))
   }
