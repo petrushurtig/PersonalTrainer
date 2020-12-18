@@ -5,15 +5,17 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import './components.css';
+import moment from 'moment';
 
 export default function AddTraining(props) {
     const [open, setOpen] = React.useState(false);
+    const m = moment().toISOString();
     const [training, setTraining] = React.useState({
-       customer: '', date: '', duration: '', activity: ''
+    date: '', duration: '', activity: '',customer: ''
     })
     const handleClickOpen = () => {
+        setTraining({customer: props.customerid})
         setOpen(true);
     };
     const handleClose = () => {
@@ -30,25 +32,17 @@ export default function AddTraining(props) {
 return(
     <div>
         <div className="addBtn">
-        <Button style={{margin:10}} color="primary" onClick={handleClickOpen}><AddBoxIcon fontSize="large"/></Button>
+        <Button style={{margin:10}} color="primary" onClick={handleClickOpen}>Add training</Button>
         </div>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">New training</DialogTitle>
             <DialogContent>
-            <TextField
-                autoFocus
-                margin="dense"
-                name="customer"
-                value={training.customer}
-                onChange={event => handleInputChange(event)}
-                label="Customer"
-                fullWidth
-                 />
                 <TextField
                 autoFocus
                 margin="dense"
                 name="date"
                 value={training.date}
+                defaultValue={m}
                 onChange={event => handleInputChange(event)}
                 label="Date"
                 fullWidth
@@ -69,6 +63,8 @@ return(
                 label="Activity"
                 fullWidth
                  />
+                
+                
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">

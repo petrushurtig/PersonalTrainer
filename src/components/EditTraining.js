@@ -13,7 +13,7 @@ export default function EditTraining(props) {
        customer:'', date: '', duration: '', activity: ''
     })
     const handleClickOpen = () => {
-        setTraining({customer: props.training.customer, date: props.training.date, duration: props.training.duration, 
+        setTraining({customer: props.customerid, date: props.training.date, duration: props.training.duration, 
         activity: props.training.activity})
         setOpen(true);
     };
@@ -25,7 +25,7 @@ export default function EditTraining(props) {
           setTraining({...training, [event.target.name]: event.target.value })
       }
       const updateTraining = () => {
-          props.updateTraining(training, props.training.links[1].href);
+          props.updateTraining(training);
           handleClose();
 }
 return(
@@ -34,15 +34,6 @@ return(
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Edit training</DialogTitle>
             <DialogContent>
-            <TextField
-                autoFocus
-                margin="dense"
-                name="customer"
-                value={training.customer}
-                onChange={event => handleInputChange(event)}
-                label="Customer"
-                fullWidth
-                 />
                 <TextField
                 autoFocus
                 margin="dense"

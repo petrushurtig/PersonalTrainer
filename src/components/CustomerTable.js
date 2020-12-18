@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import EditCustomer from './EditCustomer';
 import AddCustomer from './AddCustomer';
+import AddTraining from './AddTraining';
 
 
 export default function CustomerTable() {
@@ -19,11 +20,12 @@ export default function CustomerTable() {
     .then(data => setCustomers(data.content))
   }
   const deleteCustomer = (link) => {
+    if(window.confirm('Are you sure?')) {
     fetch(link, {method: 'DELETE'})
     .then(res => fetchData())
     .catch(err => console.error(err))
+    }
   }
-  
   const saveCustomer = (customer) => {
     fetch('https://customerrest.herokuapp.com/api/customers', {
       method: 'POST',
@@ -33,6 +35,19 @@ export default function CustomerTable() {
       body: JSON.stringify(customer)
     })
     .then(res => fetchData())
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+  }
+  const saveTraining = (training) => {
+    fetch('https://customerrest.herokuapp.com/api/trainings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(training)
+    })
+    .then(res => fetchData())
+    .then(res => console.log(res))
     .catch(err => console.error(err))
   }
 
@@ -51,15 +66,23 @@ export default function CustomerTable() {
     {
       sortable: false,
       filterable: false,
-      width: 100,
+      width: 50,
       accessor: 'links[1].href',
-      Cell: row => <Button size="small" color="secondary" onClick={() => deleteCustomer(row.value)}><DeleteIcon /></Button>
+      Cell: row => <div><Button size="small" color="secondary" onClick={() => deleteCustomer(row.value)}><DeleteIcon /></Button>
+      </div>
     },
     {
       sortable: false,
       filterable: false,
-      width: 100,
+      width: 50,
       Cell: row => <EditCustomer updateCustomer={updateCustomer} customer={row.original} />
+    },
+    {
+      sortable: false,
+      filterable: false,
+      width: 150,
+      accessor:'links[1].href',
+      Cell: row => <AddTraining saveTraining={saveTraining} customerid={row.value} />
     },
     {
       Header: 'Firstname',
