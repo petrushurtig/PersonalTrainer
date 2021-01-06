@@ -3,10 +3,8 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { format } from 'date-fns';
 import './components.css';
 import moment from 'moment';
-
 
 export default function TrainingTable() {
     const [trainings, setTrainings] = useState([]);
@@ -16,18 +14,18 @@ export default function TrainingTable() {
     const fetchData = () => {
       fetch('https://customerrest.herokuapp.com/gettrainings')
       .then(res => res.json())
-      .then(data => setTrainings(data))
+      .then(res => setTrainings(res))
     }
+    
     const deleteTraining = (id) => {
       if(window.confirm('Are you sure?')){
       fetch('https://customerrest.herokuapp.com/api/trainings/' + id, 
       {method: 'DELETE'})
       .then(res => fetchData())
-      .then(res => console.log(res))
       .catch(err => console.error(err))
+      }
     }
-  }
-  
+    
     const columns = [
       {
         sortable: false,
@@ -40,8 +38,9 @@ export default function TrainingTable() {
       {
         Header: 'Date',
         id: 'date',
+        width: 200,
         accessor: 'date',
-        Cell: ({ value }) => { return moment(value).format("DD.MM.YYYY, hh:mm A")}  
+        Cell: ({ value }) => { return moment(value).format("DD.MM.YYYY, hh:mm A")} 
       },
       {
         Header: 'Duration',

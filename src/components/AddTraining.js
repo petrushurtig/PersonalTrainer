@@ -10,7 +10,7 @@ import moment from 'moment';
 
 export default function AddTraining(props) {
     const [open, setOpen] = React.useState(false);
-    const m = moment().toISOString();
+    const [date, setDate] = React.useState('');
     const [training, setTraining] = React.useState({
     date: '', duration: '', activity: '',customer: ''
     })
@@ -28,7 +28,9 @@ export default function AddTraining(props) {
       const addTraining = () => {
           props.saveTraining(training);
           handleClose();
-}
+        }
+        const currentDate = moment().format("YYYY-MM-DDTHH:mm")
+
 return(
     <div>
         <div className="addBtn">
@@ -41,11 +43,13 @@ return(
                 autoFocus
                 margin="dense"
                 name="date"
+                type="datetime-local"
+                defaultValue={currentDate}
                 value={training.date}
-                //defaultValue={m}
                 onChange={event => handleInputChange(event)}
                 label="Date"
                 fullWidth
+               
                  />
                 <TextField
                 margin="dense"

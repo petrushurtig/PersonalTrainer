@@ -1,16 +1,11 @@
 import React, { useState, Fragment } from 'react';
 import clsx from 'clsx';
 import { Router, Route, Link } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { createBrowserHistory } from "history";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -21,11 +16,11 @@ import MenuIcon from "@material-ui/icons/Menu";
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ContactsIcon from '@material-ui/icons/Contacts';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
-import HomeIcon from '@material-ui/icons/Home';
-
-import Home from './Home';
+import BarChartIcon from '@material-ui/icons/BarChart';
 import TrainingTable from './TrainingTable';
 import CustomerTable from './CustomerTable';
+import Schedule from './Schedule';
+import Statistics from './Chart';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -92,15 +87,6 @@ const MyDrawer = withStyles(styles)(
           <ListItem
             button
             component={Link}
-            to="/"
-            onClick={onItemClick("Home")}
-          >
-            <ListItemIcon> <HomeIcon /> </ListItemIcon>
-            <ListItemText>Home</ListItemText>
-          </ListItem>
-          <ListItem
-            button
-            component={Link}
             to="/Customers"
             onClick={onItemClick("Customers")}
           >
@@ -122,14 +108,23 @@ const MyDrawer = withStyles(styles)(
             onClick={onItemClick("Calendar")}>
             <ListItemIcon> <CalendarTodayIcon /> </ListItemIcon>
             <ListItemText>Calendar</ListItemText>
+          </ListItem>
+          <ListItem 
+            button 
+            component={Link}
+            to="/statistics"
+            onClick={onItemClick("Statistics")}>
+            <ListItemIcon> <BarChartIcon /> </ListItemIcon>
+            <ListItemText>Statistics</ListItemText>
 
           </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>
-        <Route exact path="/" component={Home} />
         <Route path="/customers" component={CustomerTable} />
         <Route path="/trainings" component={TrainingTable} />
+        <Route path="/calendar" component={Schedule} />
+        <Route path="/statistics" component={Statistics} />
       </main>
     </Router>
   )

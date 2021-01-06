@@ -1,3 +1,5 @@
+
+
 h1 {
    text-align: center;
 }
@@ -6,4 +8,10 @@ h1 {
 }
 .addCustomerBtn {
     float: right;
+}
+.chart {
+    margin: 20px;
+}
+.schedule {
+    margin: 10px;
 }

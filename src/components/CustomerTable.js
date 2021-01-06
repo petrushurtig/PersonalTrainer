@@ -125,7 +125,7 @@ export default function CustomerTable() {
     <div>
     <AddCustomer saveCustomer={saveCustomer} />
     <h1>Customers</h1>
-    <ReactTable  className="table" filterable="true" data={customers} columns={columns}/>
+    <ReactTable className="table" filterable="true" data={customers} columns={columns}/>
     </div>
   );
 }
